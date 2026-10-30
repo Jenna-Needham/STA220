@@ -32,24 +32,55 @@ glimpse(glassboro)
 
 # ---- Task 1. Land and people ---------------------------------------------------------------
 
-
+ggplot(colleges, aes(x = land_sqmi, y = pop)) +
+  geom_point()
 
 
 # ---- Task 2. State aid ---------------------------------------------------------------------
 
-
+ggplot(colleges, aes(x = state_aid_m, y = town)) +
+  geom_col()
 
 # ---- Task 3. Glassboro's budget over time --------------------------------------------------
 # Hint: + scale_x_continuous(breaks = 2016:2025)   )
 
+ggplot(glassboro, aes(x = year, y = budget_m)) +
+  geom_point() +
+  scale_x_continuous(breaks = 2016:2025)
+
+ggplot(glassboro, aes(x = year, y = budget_m)) +
+  geom_col() +
+  scale_x_continuous(breaks = 2016:2025)
 
 
 # ---- Task 4. Budget per resident -------------------------------------------------------------
 # Hint: mutate(budget_per_resident = budget_m * 1000000 / pop). 
 
+colleges2 <- colleges |>
+  mutate(
+    budget_per_resident = budget_m * 1000000 / pop
+  )
 
+ggplot(colleges2, aes(x = budget_per_resident, y = town)) +
+  geom_col()
 
 # ---- Task 5. Labels, then save it -----------------------------------------------------------
 # Hint: ggsave("output/budget_per_resident.png", width = 6, height = 4).
+
+ggplot(colleges2, aes(x = budget_per_resident, y = town)) +
+  geom_col() +
+  labs(
+    title = "Camden budgets the most per resident among these college towns",
+    subtitle = "Each bar is one New Jersey town with a four-year college",
+    x = "General budget per resident, 2025 ($)",
+    y = "Town",
+    caption = "Source: NJ DCA, User Friendly Budget Database, 2025"
+  )
+
+ggsave(
+  "output/budget_per_resident.png",
+  width = 6,
+  height = 4
+)
 
 

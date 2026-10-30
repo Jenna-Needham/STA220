@@ -2,7 +2,7 @@
 # Setup check for Module 3. 
 
 # install once per computer, then put a # in front of this line
-install.packages(c("tidyverse", "plotly", "shiny"))
+# install.packages(c("tidyverse", "plotly", "shiny"))
 
 # load everything Module 3 uses
 library(tidyverse)
